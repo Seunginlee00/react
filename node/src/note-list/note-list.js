@@ -11,7 +11,7 @@ class NodeList extends Component {
     render() {
         const noteListReturn = notes => {
             return notes.map((note, idx) => {
-                return <Note key={idx} noteNumber={idx} title={note.title} text={note.date} edited={note.edited}/>;
+                return <Note key={idx} noteNumber={idx} title={note.title} text={note.text} date={note.date} edited={note.edited} />;
             });
         };
 

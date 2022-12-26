@@ -7,15 +7,18 @@ class Note extends Component {
         text: '',
         date: new Date()
     };
+
     state = {
         showEditModal: false,
         showDeleteModal: false
     };
+
     changeEditToogle = () => {
         this.setState({
             showChangeModal: !this.state.showChangeModal
         });
     };
+
     changeDeleteToogle = () => {
         this.setState({
             showDeleteModal: !this.state.showDeleteModal
@@ -38,7 +41,7 @@ class Note extends Component {
                 </span>
             </div>
                 <div>{this.props.text}</div>
-            </div>
+        </div>
     );
 }
 
