@@ -1,7 +1,11 @@
 {
   "dependencies": {
+    "add": "^2.0.6",
     "create-react-app": "^5.0.1",
     "deprecated": "^0.0.2",
-    "node-sass": "^8.0.0"
+    "node-sass": "^8.0.0",
+    "or": "^0.2.0",
+    "react-router-dom": "^6.6.1",
+    "yarn": "^1.22.19"
   }
 }

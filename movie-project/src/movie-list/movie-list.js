@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './movie-list.css';
 import styled from 'styled-components';
+import { confetti } from 'dom-confetti';
+import numeral from 'react-numeral';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -89,35 +91,43 @@ class MovieList extends React.Component {
         confetti(this.domConfettiRefs[idx].current);
     };
 
+    historyPush = (movieName) => {
+      this.props.history.push(`${movieName}`)
+    }
 
     render(){
-        const convertEnterToLine = someString => {
-            const strings = someString.split('\n');
-            return strings.map((values,idx) => {
-                return < span key ={idx}>{values}</span>;
+        
+      const showGenre = (array) => {
+        return array.map((genre, idx) => {
+            return <span key={idx}>{genre}</span>
+        });
+    };
+
+        const convertEnterToLine = string => {
+            const stringArray = string.split('\n');
+            return stringArray.map((comment,idx) => {
+                return <span key ={idx}>{comment}</span>
             });
         };
 
-        const showGenre = genres => {
-            return genres.map((genre, idx) => {
-                return < span key={idx}>{genre}</span>;
-            });
-        };
+    
 
-        const renderMovieList = lists => {
-            return lists.map((unit,idx) => {
-                return (
-                    <StyledDiv key={idx} backgroundImage={unit.image} likeImage={'/images/like.svg'}>
-                        <span className="title">{unit.movieName}</span>
+        const renderMovie = (list) => {
+            return list.map((unit,idx) => {
+                return <StyledDiv key={idx} backgroundImage={unit.image} likeImage={'/images/like.svg'}>
+                        <span className="title" onClick={() => this.historyPush(unit.movieName)}>{unit.movieName}</span>
                         <div className="genre">{showGenre(unit.genre)}</div>
-                        <span className="sub">{unit.releaseDate == null ? '미개봉' : `${unit.releaseDate} 개봉`}</span>
-                        {unit.releaseDate != null && (
+                        <span className="sub">
+                          {unit.releaseDate == null ? '미개봉' : `${unit.releaseDate} 개봉`}
+                          </span>
+                        {unit.releaseDate != null && 
                             <span className="sub">
                                 {`누적 관객 수: ${numeral(unit.totalAudience).format('0.0')}명 (${unit.grade}/10)`}
                             </span>
-                        )}
+                        }
 
                         <div className='sub-introduce'>{convertEnterToLine(unit.subIntro)}</div>
+
                         <div className='like-button'>
                         {/* ref를 연결  */}
                             <span
@@ -128,11 +138,10 @@ class MovieList extends React.Component {
                             />
                         </div>
                     </StyledDiv>
-                );
             });
         };
 
-        return <div>{renderMovieList(this.props.movieData)}</div>;
+        return <div>{renderMovie(this.props.movieData)}</div>;
     }
 }
 
