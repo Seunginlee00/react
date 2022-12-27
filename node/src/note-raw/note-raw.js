@@ -42,9 +42,25 @@ class NoteRaw extends Component{
                 <input 
                     id="note-title"
                     name="title"
-                    
+                    placeholder="메모 제목 입력"
+                    value={this.state.title}
+                    onChange={this.changeTitle}
+                    className="radius"
                 />
+                <textarea 
+                id="note-text"
+                name="text"
+                placeholder="텍스트 입력"
+                value={this.state.text}
+                onChange={this.changeText}
+                className="radius"
+                />
+            </div>
+            <div id="add-or-change-note-button">
+                <button onClick={this.execute}>작성하기</button>
             </div>
         </>
     );
 }
+
+export default NoteRaw;
